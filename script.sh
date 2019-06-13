@@ -34,14 +34,14 @@ function check_system(){
 function install_ss_panel_mod_UIm(){
     yum remove httpd -y
 	yum install unzip zip git -y
-	wget -c --no-check-certificate https://raw.githubusercontent.com/marisn2017/ss-panel-v3-mod_Uim/master/lnmp1.5.zip && unzip lnmp1.5.zip && rm -rf lnmp1.5.zip && cd lnmp1.5 && chmod +x install.sh && ./install.sh lnmp
+	wget -c --no-check-certificate https://raw.githubusercontent.com/xygengcn/ss-panel-v3-mod_Uim/master/lnmp1.5.zip && unzip lnmp1.5.zip && rm -rf lnmp1.5.zip && cd lnmp1.5 && chmod +x install.sh && ./install.sh lnmp
 	cd /home/wwwroot/
 	cp -r default/phpmyadmin/ .  #复制数据库
 	cd default
 	rm -rf index.html
 	yum update nss curl iptables -y
 	#克隆项目
-	git clone https://github.com/marisn2017/ss-panel-v3-mod_Uim-resource.git tmp && mv tmp/.git . && rm -rf tmp && git reset --hard
+	git clone https://github.com/xygengcn/ss-panel-v3-mod_Uim-resource.git tmp && mv tmp/.git . && rm -rf tmp && git reset --hard
 	#复制配置文件
 	# cp config/.config.php.example config/.config.php
 	#移除防跨站攻击(open_basedir)
@@ -56,8 +56,8 @@ function install_ss_panel_mod_UIm(){
 	chmod -R 777 *
 	chown -R www:www storage
 	#下载配置文件
-	wget -N -P  /usr/local/nginx/conf/ --no-check-certificate "https://raw.githubusercontent.com/marisn2017/ss-panel-v3-mod_Uim/master/nginx.conf"
-	wget -N -P /usr/local/php/etc/ --no-check-certificate "https://raw.githubusercontent.com/marisn2017/ss-panel-v3-mod_Uim/master/php.ini"
+	wget -N -P  /usr/local/nginx/conf/ --no-check-certificate "https://raw.githubusercontent.com/xygengcn/ss-panel-v3-mod_Uim/master/nginx.conf"
+	wget -N -P /usr/local/php/etc/ --no-check-certificate "https://raw.githubusercontent.com/xygengcn/ss-panel-v3-mod_Uim/master/php.ini"
 	#开启scandir()函数
 	sed -i 's/,scandir//g' /usr/local/php/etc/php.ini
 	service nginx restart #重启Nginx
@@ -77,7 +77,7 @@ EOF
 	mv tool/alipay-f2fpay vendor/
 	mv -f tool/cacert.pem vendor/guzzle/guzzle/src/Guzzle/Http/Resources/
 	#mv -f tool/autoload_classmap.php vendor/composer/
-	wget -N -P  /home/wwwroot/default/vendor/composer --no-check-certificate "https://raw.githubusercontent.com/marisn2017/ss-panel-v3-mod_Uim/master/autoload_classmap.php"
+	wget -N -P  /home/wwwroot/default/vendor/composer --no-check-certificate "https://raw.githubusercontent.com/xygengcn/ss-panel-v3-mod_Uim/master/autoload_classmap.php"
 	php xcat syncusers            #同步用户
 	php xcat initQQWry            #下载IP解析库
 	php xcat resetTraffic         #重置流量
@@ -111,7 +111,7 @@ function Libtest(){
 	echo "$LIB_PING $LIB" >> ping.pl
 	libAddr=`sort -V ping.pl|sed -n '1p'|awk '{print $2}'`
 	if [ "$libAddr" == "$GIT" ];then
-		libAddr='https://raw.githubusercontent.com/marisn2017/ss-panel-v3-mod_Uim/master/libsodium-1.0.17.tar.gz'
+		libAddr='https://raw.githubusercontent.com/xygengcn/ss-panel-v3-mod_Uim/master/libsodium-1.0.17.tar.gz'
 	else
 		libAddr='https://download.libsodium.org/libsodium/releases/libsodium-1.0.17.tar.gz'
 	fi
@@ -313,7 +313,7 @@ function install_node(){
 	# 启用supervisord守护
 	supervisorctl shutdown
 	#某些机器没有echo_supervisord_conf
-	wget -N -P  /etc/ --no-check-certificate  https://raw.githubusercontent.com/marisn2017/ss-panel-v3-mod_Uim/master/supervisord.conf	
+	wget -N -P  /etc/ --no-check-certificate  https://raw.githubusercontent.com/xygengcn/ss-panel-v3-mod_Uim/master/supervisord.conf	
 	supervisord
 	#iptables
 	iptables -F
@@ -336,7 +336,7 @@ function install_RS(){
      wget -N --no-check-certificate https://github.com/91yun/serverspeeder/raw/master/serverspeeder.sh && bash serverspeeder.sh
 }
 function NEW_NODE(){
-     wget -N --no-check-certificate  https://raw.githubusercontent.com/marisn2017/ss-panel-v3-mod_Uim/master/node.sh && bash node.sh
+     wget -N --no-check-certificate  https://raw.githubusercontent.com/xygengcn/ss-panel-v3-mod_Uim/master/node.sh && bash node.sh
 }
 
 #常规变量
